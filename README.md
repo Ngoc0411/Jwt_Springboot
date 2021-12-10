@@ -2,7 +2,7 @@
 
 Xác thực, đăng kí user sử dụng jwt
 
-Tạo các bảng trong mysql:
+### 1. Tạo các bảng trong mysql:
 
 ```sh
 -- testAuthDb.roles definition
@@ -44,3 +44,50 @@ INSERT INTO roles(name) VALUES('ROLE_ADMIN');
   
 ```
 
+### 2. Test với các API
+Đăng kí:
+```sh
+curl --location --request POST 'http://localhost:8080/api/auth/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "ngocpv",
+    "email": "ngoc@01234",
+    "password": "123456",
+    "role": ["user"]
+}'
+```
+Response:
+```sh
+{
+    "status": "SUCCESS",
+    "message": "User registered successfully!",
+    "data": null
+}
+```
+
+Đăng nhập:
+```sh
+curl --location --request POST 'http://localhost:8080/api/auth/signin' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "ngocpv",
+    "password": "123456"
+}'
+```
+Response:
+```sh
+{
+    "status": "SUCCESS",
+    "message": null,
+    "data": {
+        "id": 13,
+        "username": "ngocpv",
+        "email": "ngoc@01234",
+        "roles": [
+            "ROLE_USER"
+        ],
+        "tokenType": "Bearer",
+        "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuZ29jcHYiLCJpYXQiOjE2MzkxMjIxNzUsImV4cCI6MTYzOTIwODU3NX0.gBDQtne98duAhANAcjwIExe_xF-qT07zQGMw2ms-KTxgf-MzPxggi5kWVr391hy4dq-Ua1qGCtkoldGf0lat1A"
+    }
+}
+```
