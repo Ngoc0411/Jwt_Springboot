@@ -1,9 +1,10 @@
 # Jwt_Springboot
-Xác thực, đăng kí user sử dụng jwt
 
+Xác thực, đăng kí user sử dụng jwt
 
 Tạo các bảng trong mysql:
 
+```sh
 -- testAuthDb.roles definition
 
 CREATE TABLE `roles` (
@@ -34,3 +35,12 @@ CREATE TABLE `user_roles` (
   KEY `FKh8ciramu9cc9q3qcqiv4ue8a6` (`role_id`),
   KEY `FKhfh9dx7w3ubf1co1vdev94g3f` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  
+ -- Thêm dữ liệu cho bảng roles 
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
+  
+```
+
